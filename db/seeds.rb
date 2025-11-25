@@ -51,8 +51,8 @@ puts "🎉 Seed for characters completed! #{Character.count} characters created.
 scenarios_data = [
 {
   title: "Légendes oubliées",
-  category: "Médiéval fantastique",
-  prompt: <<~PROMPT
+  description: "Médiéval fantastique",
+  scenario_prompt: <<~PROMPT
     Tu es une IA scénariste experte en univers médiéval fantastique.
 
     Personnage : {{character}}
@@ -71,8 +71,8 @@ scenarios_data = [
 
   {
     title: "Rues néon",
-    category: "Cyberpunk",
-    prompt: <<~PROMPT
+    description: "Cyberpunk",
+    scenario_prompt: <<~PROMPT
       Tu es une IA scénariste en univers Cyberpunk urbain, sombre, saturé de technologie et corruption.
 
       Personnage : {{character}}
@@ -91,8 +91,8 @@ scenarios_data = [
   },
   {
     title: "Dernier souffle du monde",
-    category: "Post-apocalyptique",
-    prompt: <<~PROMPT
+    description: "Post-apocalyptique",
+    scenario_prompt: <<~PROMPT
       Tu es une IA scénariste experte en univers post-apocalyptique.
 
       Personnage : {{character}}
@@ -111,8 +111,8 @@ scenarios_data = [
   },
   {
     title: "Étoiles lointaines",
-    category: "Science-fiction dystopique",
-    prompt: <<~PROMPT
+    description: "Science-fiction dystopique",
+    scenario_prompt: <<~PROMPT
       Tu es une IA scénariste spécialisée en science-fiction dystopique.
 
       Personnage : {{character}}
@@ -131,8 +131,8 @@ scenarios_data = [
   },
   {
     title: "Voiles d’ombre",
-    category: "Dark Fantasy",
-    prompt: <<~PROMPT
+    description: "Dark Fantasy",
+    scenario_prompt: <<~PROMPT
       Tu es une IA scénariste en univers Dark Fantasy.
 
       Personnage : {{character}}
