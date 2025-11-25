@@ -1,4 +1,3 @@
-class Chat < ApplicationRecord
-  belongs_to :user
+class Chat < ApplicationRecordgit 
   belongs_to :game
 end
