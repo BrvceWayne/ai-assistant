@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_25_112405) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_25_120024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,12 +27,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_112405) do
 
   create_table "chats", force: :cascade do |t|
     t.string "title"
-    t.bigint "user_id", null: false
     t.bigint "game_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_chats_on_game_id"
-    t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -45,6 +43,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_112405) do
     t.index ["character_id"], name: "index_games_on_character_id"
     t.index ["scenario_id"], name: "index_games_on_scenario_id"
     t.index ["user_id"], name: "index_games_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "role"
+    t.string "content"
+    t.bigint "chat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
   create_table "scenarios", force: :cascade do |t|
@@ -68,8 +75,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_112405) do
   end
 
   add_foreign_key "chats", "games"
-  add_foreign_key "chats", "users"
   add_foreign_key "games", "characters"
   add_foreign_key "games", "scenarios"
   add_foreign_key "games", "users"
+  add_foreign_key "messages", "chats"
 end
