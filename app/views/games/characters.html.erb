@@ -1,17 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<%# app/views/characters/show.html.erb %>
 
-  <title>Select Your Character</title>
-</head>
+<div class="container my-5">
+  <h1 class="text-center mb-4">Choisis ton personnage</h1>
 
-<body>
-  <% @characters.each do |character| %>
-   <%= character.name %></p>
-        <% end %>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @characters.each do |character| %>
+      <div class="col">
+        <div class="card h-100 shadow-sm text-center">
+          <%= image_tag character_image(character), class: "card-img-top", alt: character.name %>
 
+          <div class="card-body">
+            <h5 class="card-title"><%= character.name %></h5>
+            <p class="text-muted mb-1"><strong>Classe :</strong> <%= character.class_type.capitalize %></p>
 
+            <div class="d-flex justify-content-around mb-2">
+              <span class="badge bg-danger">HP: <%= character.health %></span>
+              <span class="badge bg-primary">Mana: <%= character.mana %></span>
+              <span class="badge bg-warning text-dark">STR: <%= character.strength %></span>
+            </div>
 
+            <p class="card-text small text-start"><strong>Quirks:</strong> <%= character.quirks.truncate(120) %></p>
 
-</body>
-</html>
+            <%= link_to "Sélectionner", games_path, class: "btn btn-primary mt-2" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-5">
+    <%= link_to "Retour au jeu", games_path, class: "btn btn-success btn-lg" %>
+  </div>
+</div>
