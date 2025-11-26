@@ -4,6 +4,7 @@
   background: $dark;
   position: relative;
   overflow: hidden;
+  color: $light;
 }
 
 .landing-content {
@@ -31,4 +32,22 @@
   z-index: 1;
 }
 
+.title-container {
+  margin-bottom: 80px;
+}
 
+.game-description {
+  max-width: 700px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.description-text {
+  font-size: 14px;
+  line-height: 2;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+    line-height: 1.8;
+  }
+}
