@@ -151,9 +151,36 @@ scenarios_data = [
   }
 ]
 
+  User.create!(
+    email: "test@gmail.com",
+    password: "123456"
+  )
+
+  User.create!(
+    email: "test1@gmail.com",
+    password: "123456"
+  )
+
+  User.create!(
+    email: "test2@gmail.com",
+    password: "123456"
+  )
+
 scenarios_data.each do |scn_data|
   Scenario.create!(scn_data)
   puts "✅ Created: #{scn_data[:title]}"  # ← name ici aussi
 end
-
 puts "🎉 Seed for scenarios completed! #{Scenario.count} scenarios created."
+
+characters = Character.all.sample(3)
+scenarios  = Scenario.all.sample(3)
+users      = User.all.sample(3)
+
+3.times do
+  Game.create!(
+    character: characters.sample,
+    scenario: scenarios.sample,
+    user:     users.sample
+  )
+end
+puts "🎉 Seed for games completed! #{Game.count} games created."
