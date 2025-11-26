@@ -13,7 +13,7 @@
     <!-- Scenarios Grid -->
     <div class="scenarios-grid">
       <% @scenarios.each do |scenario| %>
-        <%= link_to characters_games_path(scenario_id: scenario.id),
+        <%= link_to characters_games_path,
             class: "scenario-card",
             data: { turbo: false } do %>
           <div class="scenario-card-inner">
