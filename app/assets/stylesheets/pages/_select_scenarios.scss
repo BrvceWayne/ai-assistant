@@ -1,0 +1,178 @@
+// ============================================
+// SCENARIO SELECTION PAGE
+// Page de sélection des scénarios
+// ============================================
+
+.scenario-page {
+  min-height: 100vh;
+  background: $dark;
+  position: relative;
+  overflow: hidden;
+  color: $light;
+  padding: 40px 20px;
+}
+
+.scenario-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Header
+.scenario-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pixel-title-small {
+  font-size: 32px;
+  font-family: $font-family-base;
+  color: $primary;
+  text-shadow:
+    3px 3px 0 $secondary,
+    6px 6px 0 rgba($secondary, 0.3);
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  line-height: 1.3;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    text-shadow:
+      2px 2px 0 $secondary,
+      4px 4px 0 rgba($secondary, 0.3);
+  }
+}
+
+.title-sword-small {
+  display: inline-block;
+  font-size: 28px;
+  margin: 0 10px;
+  color: $light;
+  text-shadow:
+    0 0 15px rgba(255, 255, 255, 0.8),
+    3px 3px 0 #888;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin: 0 6px;
+  }
+}
+
+// Grid de scénarios
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+// Card de scénario
+.scenario-card {
+  background: rgba($light, 0.03);
+  border: 3px solid rgba($light, 0.2);
+  padding: 30px;
+  text-decoration: none;
+  color: $light;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba($primary, 0.1), rgba($secondary, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    border-color: $primary;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba($primary, 0.3);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .scenario-arrow {
+      transform: translateX(10px);
+      opacity: 1;
+    }
+  }
+}
+
+.scenario-card-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.scenario-title {
+  font-size: 20px;
+  font-family: $font-family-base;
+  color: $primary;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.scenario-description {
+  font-size: 12px;
+  line-height: 1.8;
+  color: rgba($light, 0.8);
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}
+
+.scenario-arrow {
+  font-size: 24px;
+  color: $primary;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+// Bouton retour
+.btn-back {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 12px;
+  font-family: $font-family-base;
+  color: $light;
+  background: transparent;
+  border: 3px solid rgba($light, 0.3);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $light;
+    color: $light;
+    text-decoration: none;
+    transform: translateX(-5px);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+    padding: 12px 24px;
+  }
+}

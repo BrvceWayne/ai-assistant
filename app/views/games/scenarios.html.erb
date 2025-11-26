@@ -1,108 +1,33 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scenario</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<div class="scenario-page">
+  <div class="pixel-grid"></div>
 
-        body {
-            font-family: Arial, sans-serif;
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .subtitle {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 40px;
-        }
-
-        .scenarios-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .scenario-card {
-            flex: 0 1 300px;
-        }
-
-        .scenario-card {
-            border: 2px solid #000;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .scenario-card:hover {
-            background-color: #f0f0f0;
-            transform: translateY(-5px);
-        }
-
-        .scenario-card.selected {
-            background-color: #e0e0e0;
-            border-width: 3px;
-        }
-
-        .scenario-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .scenario-description {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #333;
-        }
-    </style>
-</head>
-<body>
-    <h1>Choose Your Adventure</h1>
-    <div class="subtitle">Select a Scenario:</div>
-
-    <div class="scenarios-container">
-        <div class="scenario-card" onclick="selectScenario(this, 'legends')">
-            <div class="scenario-title">Légendes oubliées</div>
-            <p class="scenario-description">"Un monde de magie, prophéties et batailles épiques où chaque choix forge votre légende."</p>
-        </div>
-
-        <div class="scenario-card" onclick="selectScenario(this, 'neon')">
-            <div class="scenario-title">Rues néon</div>
-            <p class="scenario-description">"Néons, implants, mégacorpos et danger constant — survivez dans la noirceur urbaine."</p>
-        </div>
-
-        <div class="scenario-card" onclick="selectScenario(this, 'lastbreath')">
-            <div class="scenario-title">Dernier souffle du monde</div>
-            <p class="scenario-description">"Un monde brisé où chaque ressource compte. Survivez entre ruines, menace et alliances fragiles."</p>
-        </div>
-
-        <div class="scenario-card" onclick="selectScenario(this, 'stars')">
-            <div class="scenario-title">Étoiles lointaines</div>
-            <p class="scenario-description">"IA tyranniques, empires stellaires et rébellion : le destin de la galaxie repose sur vous."</p>
-        </div>
-
-        <div class="scenario-card" onclick="selectScenario(this, 'shadow')">
-            <div class="scenario-title">Voiles d'ombre</div>
-            <p class="scenario-description">"Magie noire, entités anciennes et choix corrompus — marchez sur la frontière entre vie et damnation."</p>
-        </div>
+  <div class="scenario-content">
+    <!-- Header -->
+    <div class="scenario-header">
+      <h1 class="pixel-title-small">
+        CHOISISSEZ<span class="title-sword-small">⚔</span>VOTRE AVENTURE
+      </h1>
+      <p class="subtitle">Sélectionnez un scénario</p>
     </div>
 
-</body>
-</html>
+    <!-- Scenarios Grid -->
+    <div class="scenarios-grid">
+      <% @scenarios.each do |scenario| %>
+        <%= link_to characters_games_path(scenario_id: scenario.id),
+            class: "scenario-card",
+            data: { turbo: false } do %>
+          <div class="scenario-card-inner">
+            <h3 class="scenario-title"><%= scenario.title %></h3>
+            <p class="scenario-description"><%= scenario.description %></p>
+            <div class="scenario-arrow">→</div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Back button -->
+    <%= link_to root_path, class: "btn-back" do %>
+      ← Retour
+    <% end %>
+  </div>
+</div>

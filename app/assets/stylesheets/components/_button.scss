@@ -1,3 +1,10 @@
+
+// Start Button
+// ============================================
+// BUTTONS COMPONENT
+// Boutons custom pour le jeu
+// ============================================
+
 .btn-start {
   display: inline-block;
   padding: 20px 50px;
@@ -15,8 +22,49 @@
     0 6px 0 #888,
     0 10px 25px rgba(255, 255, 255, 0.3);
   position: relative;
-// app/assets/stylesheets/_bouton.scss
 
+  // Effet hover avec overlay jaune
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($primary, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 10px 0 #888,
+      0 15px 35px rgba(255, 255, 255, 0.5);
+    color: $dark;
+    text-decoration: none;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 4px 0 #888,
+      0 6px 15px rgba(255, 255, 255, 0.3);
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    font-size: 10px;
+    padding: 15px 30px;
+  }
+}
+
+
+// Choice button
 .btn-dd {
   display: inline-block;
   padding: 12px 28px;
