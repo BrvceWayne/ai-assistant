@@ -11,18 +11,36 @@ $body-bg:                $light-gray;
 $font-size-base:         1rem;
 
 // Colors
-$body-color: $gray;
-$primary:    $blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
+$background: #000000;
+$primary:    #FFD700;
+$secondary:  #FF4500;
+$text-white: #FFFFFF;
+$text-gray:  rgba(255, 255, 255, 0.6); ;
 $warning:    $orange;
 
 // Buttons & inputs' radius
-$border-radius-sm:            .0625rem;
-$border-radius:               .125rem;
-$border-radius-lg:            .25rem;
-$border-radius-xl:            .5rem;
-$border-radius-xxl:           1rem;
+$border-radius: 0;
+$border-radius-sm: 0;
+$border-radius-lg: 0;
+$border-width: 3px;
 
-// Override other variables below!
+// Buttons
+$btn-padding-y: 1rem;
+$btn-padding-x: 2rem;
+$btn-font-weight: bold;
+$btn-border-width: 4px;
+
+// Spacing
+$spacer: 1rem;
+
+// Transitions
+$transition-base: all 0.2s ease-in-out;
+
+// Font
+$font-family-base: 'Press Start 2P', cursive;
+$font-size-base: 1rem;
+
+// Custom
+$pixel-font: 'Press Start 2P', cursive;
+$transition-fast: 0.2s ease;
+$mobile-breakpoint: 768px;
