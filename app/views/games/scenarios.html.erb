@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Scenario</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .scenarios-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .scenario-card {
+            flex: 0 1 300px;
+            border: 2px solid #000;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .scenario-card:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-5px);
+        }
+
+        .scenario-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .scenario-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Choose Your Adventure</h1>
+    <div class="subtitle">Select a Scenario:</div>
+
+    <div class="scenarios-container">
+        <% @scenarios.each do |scenario| %>
+            <div 
+              class="scenario-card"
+              onclick="window.location.href='/scenarios/<%= scenario.id %>'">
+                
+                <div class="scenario-title"><%= scenario.title %></div>
+                <p class="scenario-description">"<%= scenario.description %>"</p>
+            </div>
+        <% end %>
+    </div>
+
+</body>
+</html>
