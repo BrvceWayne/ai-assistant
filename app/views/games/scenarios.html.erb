@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose Scenario</title>
-    <link rel="stylesheet" href="/assets/styles.css">
+    <title>Scenario</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         * {
             margin: 0;
@@ -41,16 +41,23 @@
 
         .scenario-card {
             flex: 0 1 300px;
+        }
+
+        .scenario-card {
             border: 2px solid #000;
             padding: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: white;
         }
 
         .scenario-card:hover {
             background-color: #f0f0f0;
             transform: translateY(-5px);
+        }
+
+        .scenario-card.selected {
+            background-color: #e0e0e0;
+            border-width: 3px;
         }
 
         .scenario-title {
@@ -66,21 +73,35 @@
         }
     </style>
 </head>
-
 <body>
     <h1>Choose Your Adventure</h1>
     <div class="subtitle">Select a Scenario:</div>
 
     <div class="scenarios-container">
-        <% @scenarios.each do |scenario| %>
-            <div 
-              class="scenario-card"
-              onclick="window.location.href='/scenarios/<%= scenario.id %>'">
-                
-                <div class="scenario-title"><%= scenario.title %></div>
-                <p class="scenario-description">"<%= scenario.description %>"</p>
-            </div>
-        <% end %>
+        <div class="scenario-card" onclick="selectScenario(this, 'legends')">
+            <div class="scenario-title">Légendes oubliées</div>
+            <p class="scenario-description">"Un monde de magie, prophéties et batailles épiques où chaque choix forge votre légende."</p>
+        </div>
+
+        <div class="scenario-card" onclick="selectScenario(this, 'neon')">
+            <div class="scenario-title">Rues néon</div>
+            <p class="scenario-description">"Néons, implants, mégacorpos et danger constant — survivez dans la noirceur urbaine."</p>
+        </div>
+
+        <div class="scenario-card" onclick="selectScenario(this, 'lastbreath')">
+            <div class="scenario-title">Dernier souffle du monde</div>
+            <p class="scenario-description">"Un monde brisé où chaque ressource compte. Survivez entre ruines, menace et alliances fragiles."</p>
+        </div>
+
+        <div class="scenario-card" onclick="selectScenario(this, 'stars')">
+            <div class="scenario-title">Étoiles lointaines</div>
+            <p class="scenario-description">"IA tyranniques, empires stellaires et rébellion : le destin de la galaxie repose sur vous."</p>
+        </div>
+
+        <div class="scenario-card" onclick="selectScenario(this, 'shadow')">
+            <div class="scenario-title">Voiles d'ombre</div>
+            <p class="scenario-description">"Magie noire, entités anciennes et choix corrompus — marchez sur la frontière entre vie et damnation."</p>
+        </div>
     </div>
 
 </body>
