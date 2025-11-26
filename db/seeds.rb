@@ -1,5 +1,7 @@
 puts "🌱 Starting seed..."
 
+User.destroy_all
+Game.destroy_all
 Character.destroy_all
 puts "🧹 Cleared existing characters"
 Scenario.destroy_all
