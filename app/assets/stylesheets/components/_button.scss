@@ -1,0 +1,17 @@
+.btn-start {
+  display: inline-block;
+  padding: 20px 50px;
+  font-size: 14px;
+  font-family: $font-family-base;
+  color: $dark;
+  background: $light;
+  border: 4px solid $dark;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow:
+    0 6px 0 #888,
+    0 10px 25px rgba(255, 255, 255, 0.3);
+  position: relative;
