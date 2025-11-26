@@ -1,4 +1,7 @@
 class GamesController < ApplicationController
+  def index
+    @games = Game.all.order(created_at: :desc)
+  end
 
   def scenarios
     @scenarios = Scenario.all
@@ -28,4 +31,5 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
   end
+
 end

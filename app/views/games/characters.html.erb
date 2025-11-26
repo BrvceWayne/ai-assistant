@@ -4,10 +4,14 @@
 
   <title>Select Your Character</title>
 </head>
+
 <body>
   <% @characters.each do |character| %>
-   <container><p><%= character.name %></p></container>
+   <%= character.name %></p>
+        <% end %>
 
-  <% end %>
+
+
+
 </body>
 </html>
