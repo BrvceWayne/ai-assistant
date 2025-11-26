@@ -1,12 +1,230 @@
-.navbar-lewagon {
+// ============================================
+// NAVBAR COMPONENT
+// Navigation pixel art
+// ============================================
+
+.navbar-pixel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba($dark, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 3px solid rgba($light, 0.1);
+  z-index: 1000;
+  font-family: $font-family-base;
+}
+
+.navbar-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  background: white;
+
+  @media (max-width: 768px) {
+    padding: 15px 20px;
+  }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+// Logo / Brand
+.navbar-brand {
+  display: flex;
+  align-items: center;
 }
 
-.navbar-lewagon .navbar-brand img {
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+
+    .logo-icon {
+      transform: rotate(15deg);
+    }
+  }
+}
+
+.logo-icon {
+  font-size: 24px;
+  color: $light;
+  transition: transform 0.3s ease;
+}
+
+.logo-text {
+  font-size: 18px;
+  color: $primary;
+  letter-spacing: 2px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+// Navigation links (desktop)
+.navbar-links {
+  display: flex;
+  gap: 30px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.nav-link {
+  font-size: 12px;
+  color: rgba($light, 0.7);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+
+  &:hover {
+    color: $primary;
+    border-color: $primary;
+  }
+}
+
+// User section
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-name {
+  font-size: 10px;
+  color: rgba($light, 0.8);
+  letter-spacing: 1px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+// Bouton logout
+.btn-logout {
   width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid rgba($light, 0.2);
+  color: rgba($light, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    border-color: $secondary;
+    color: $secondary;
+    transform: scale(1.1);
+  }
+}
+
+// Bouton login navbar
+.btn-login-nav {
+  padding: 10px 20px;
+  font-size: 12px;
+  color: $dark;
+  background: $light;
+  border: 3px solid $dark;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $primary;
+    color: $dark;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px 16px;
+    font-size: 10px;
+  }
+}
+
+// Menu burger (mobile)
+.navbar-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: 2px solid rgba($light, 0.3);
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  span {
+    width: 20px;
+    height: 2px;
+    background: $light;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    border-color: $primary;
+
+    span {
+      background: $primary;
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+}
+
+// Menu mobile
+.navbar-mobile {
+  display: none;
+  flex-direction: column;
+  background: rgba($dark, 0.98);
+  border-top: 2px solid rgba($light, 0.1);
+  padding: 20px;
+  gap: 15px;
+
+  @media (max-width: 768px) {
+    &.active {
+      display: flex;
+    }
+  }
+}
+
+.nav-link-mobile {
+  font-size: 14px;
+  color: rgba($light, 0.8);
+  text-decoration: none;
+  padding: 15px;
+  border: 2px solid rgba($light, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+// Ajuster le body pour le fixed navbar
+body {
+  padding-top: 80px;
+
+  @media (max-width: 768px) {
+    padding-top: 70px;
+  }
 }

@@ -1,37 +1,40 @@
-<nav class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-    <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+<nav class="navbar-pixel">
+  <div class="navbar-content">
+    <!-- Logo / Titre -->
+    <div class="navbar-brand">
+      <%= link_to root_path, class: "navbar-logo" do %>
+        <span class="logo-icon">⚔</span>
+        <span class="logo-text">DONJON</span>
+        <span class="logo-text">ADVENTURE</span>
+      <% end %>
     </div>
+
+
+    <!-- User section (Devise) -->
+    <div class="navbar-user">
+      <% if user_signed_in? %>
+        <div class="user-info">
+          <span class="user-name"><%= current_user.email.split('@').first.upcase %></span>
+          <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-logout" do %>
+            <i class="fas fa-sign-out-alt"></i>
+          <% end %>
+        </div>
+      <% else %>
+        <%= link_to "LOGIN", new_user_session_path, class: "btn-login-nav" %>
+      <% end %>
+    </div>
+
+    <!-- Menu burger (mobile) -->
+    <button class="navbar-burger" id="navbarBurger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Menu mobile -->
+  <div class="navbar-mobile" id="navbarMobile">
+    <%= link_to "Aventures", scenarios_games_path, class: "nav-link-mobile" %>
+    <%= link_to "Héros", "#", class: "nav-link-mobile" %>
   </div>
 </nav>
