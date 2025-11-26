@@ -1,13 +1,9 @@
 class GamesController < ApplicationController
-  def home
-  end
 
-  # Liste des scénarios
   def scenarios
     @scenarios = Scenario.all
   end
 
-  # Liste des personnages
   def characters
     @scenario = Scenario.find(params[:scenario_id])
     @characters = Character.all
@@ -28,7 +24,7 @@ class GamesController < ApplicationController
       redirect_to games_scenarios_path, alert: "Impossible de démarrer la partie."
     end
   end
-  
+
   def show
     @game = Game.find(params[:id])
   end
