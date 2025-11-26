@@ -8,7 +8,7 @@ class GamesController < ApplicationController
   end
 
   def characters
-    @scenario = Scenario.find(params[:scenario_id])
+    # @scenario = Scenario.find(params[:scenario_id])
     @characters = Character.all
   end
 
