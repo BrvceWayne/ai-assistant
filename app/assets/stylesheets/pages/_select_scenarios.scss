@@ -62,9 +62,10 @@
 // Grid de scénarios
 .scenarios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
   gap: 30px;
   margin-bottom: 60px;
+  justify-content: center;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
