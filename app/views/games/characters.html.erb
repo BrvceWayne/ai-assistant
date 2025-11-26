@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <title>Select Your Character</title>
+</head>
+<body>
+  <% @characters.each do |character| %>
+   <container><p><%= character.name %></p></container>
+
+  <% end %>
+</body>
+</html>

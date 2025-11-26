@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   end
 
   def characters
-    @scenario = Scenario.find(params[:scenario_id])
+    # @scenario = Scenario.find(params[:scenario_id])
     @characters = Character.all
   end
 
@@ -28,6 +28,4 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
   end
-end
-
 end
