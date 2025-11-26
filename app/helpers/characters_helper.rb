@@ -6,8 +6,8 @@ module CharactersHelper
                            .gsub(/[^a-z0-9]+/, "-")
                            .gsub(/^-|-$/, "")
 
-    # Retourne l'URL Cloudinary
-    "https://res.cloudinary.com/#{ENV['CLOUDINARY_CLOUD_NAME']}/image/upload/characters/#{filename}.png"
+    # Utilise la méthode Cloudinary
+    Cloudinary::Utils.cloudinary_url("characters/#{filename}.png", secure: true)
   rescue
     "https://via.placeholder.com/400x300?text=No+Image"
   end
