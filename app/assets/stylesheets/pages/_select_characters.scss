@@ -1,0 +1,240 @@
+// ============================================
+// CHARACTER SELECTION PAGE
+// Page de sélection des personnages
+// ============================================
+
+.character-page {
+  min-height: 100vh;
+  background: $dark;
+  position: relative;
+  overflow: hidden;
+  color: $light;
+  padding: 40px 20px;
+}
+
+.character-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+// Header
+.character-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+// Badge scénario choisi
+.scenario-badge {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: rgba($primary, 0.1);
+  border: 2px solid rgba($primary, 0.3);
+  font-size: 12px;
+
+  .badge-label {
+    color: rgba($light, 0.6);
+  }
+
+  .badge-value {
+    color: $primary;
+    margin-left: 10px;
+  }
+}
+
+// Grid de personnages
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+// Card de personnage
+.character-card {
+  background: rgba($light, 0.03);
+  border: 3px solid rgba($light, 0.2);
+  padding: 30px;
+  text-decoration: none;
+  color: $light;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  // Couleurs par classe
+  &.character-warrior::before {
+    background: linear-gradient(135deg, rgba(#FF4500, 0.1), rgba(#FF6B6B, 0.1));
+  }
+
+  &.character-mage::before {
+    background: linear-gradient(135deg, rgba(#8A2BE2, 0.1), rgba(#BA55D3, 0.1));
+  }
+
+  &.character-rogue::before {
+    background: linear-gradient(135deg, rgba(#32CD32, 0.1), rgba(#00FF00, 0.1));
+  }
+
+  &.character-cleric::before {
+    background: linear-gradient(135deg, rgba(#FFD700, 0.1), rgba(#FFA500, 0.1));
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba($primary, 0.3);
+
+    &::before {
+      opacity: 1;
+    }
+
+    &.character-warrior {
+      border-color: #FF4500;
+    }
+
+    &.character-mage {
+      border-color: #8A2BE2;
+    }
+
+    &.character-rogue {
+      border-color: #32CD32;
+    }
+
+    &.character-cleric {
+      border-color: #FFD700;
+    }
+
+    .character-select-btn {
+      transform: translateX(10px);
+    }
+  }
+}
+
+// Header de la card
+.character-header-card {
+  position: relative;
+  z-index: 1;
+  border-bottom: 2px solid rgba($light, 0.1);
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.character-name {
+  font-size: 18px;
+  font-family: $font-family-base;
+  color: $primary;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.character-class {
+  font-size: 10px;
+  padding: 5px 10px;
+  background: rgba($light, 0.1);
+  border: 1px solid rgba($light, 0.2);
+  letter-spacing: 1px;
+
+  @media (max-width: 768px) {
+    font-size: 8px;
+    padding: 4px 8px;
+  }
+}
+
+// Stats
+.character-stats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-icon {
+  font-size: 20px;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: rgba($light, 0.6);
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 16px;
+  color: $primary;
+  font-weight: bold;
+}
+
+// Quirks (particularités)
+.character-quirks {
+  position: relative;
+  z-index: 1;
+  background: rgba($dark, 0.3);
+  padding: 15px;
+  border-left: 3px solid rgba($primary, 0.3);
+}
+
+.quirks-label {
+  font-size: 10px;
+  color: rgba($light, 0.7);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.quirks-text {
+  font-size: 10px;
+  line-height: 1.6;
+  color: rgba($light, 0.9);
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
+}
+
+// Bouton select
+.character-select-btn {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 12px;
+  color: $primary;
+  padding: 12px;
+  border: 2px solid $primary;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
+}

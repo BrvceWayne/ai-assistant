@@ -1,34 +1,72 @@
 <%# app/views/characters/show.html.erb %>
 
-<div class="container my-5">
-  <h1 class="text-center mb-4">Choisis ton personnage</h1>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <% @characters.each do |character| %>
-      <div class="col">
-        <div class="card h-100 shadow-sm text-center">
-          <%= image_tag character_image(character), class: "card-img-top", alt: character.name, skip_pipeline: true %>
+<div class="character-page">
+  <div class="pixel-grid"></div>
 
-          <div class="card-body">
-            <h5 class="card-title"><%= character.name %></h5>
-            <p class="text-muted mb-1"><strong>Classe :</strong> <%= character.class_type.capitalize %></p>
+  <div class="character-content">
+    <!-- Header -->
+    <div class="character-header">
+      <h1 class="pixel-title-small">
+        CHOISISSEZ<span class="title-sword-small">⚔</span>VOTRE HÉROS
+      </h1>
+      <p class="subtitle">Sélectionnez votre personnage</p>
 
-            <div class="d-flex justify-content-around mb-2">
-              <span class="badge bg-danger">HP: <%= character.health %></span>
-              <span class="badge bg-primary">Mana: <%= character.mana %></span>
-              <span class="badge bg-warning text-dark">STR: <%= character.strength %></span>
+      <!-- Scenario choisi -->
+      <div class="scenario-badge">
+        <span class="badge-label">Scénario :</span>
+        <span class="badge-value"><%= @scenario.title %></span>
+      </div>
+    </div>
+
+    <!-- Characters Grid -->
+    <div class="characters-grid">
+      <% @characters.each do |character| %>
+        <%= link_to games_path(scenario_id: @scenario.id, character_id: character.id),
+            method: :post,
+            class: "character-card character-#{character.class_type}",
+            data: { turbo: false } do %>
+
+          <div class="character-header-card">
+            <h3 class="character-name"><%= character.name %></h3>
+            <span class="character-class"><%= character.class_type.upcase %></span>
+          </div>
+
+          <div class="character-stats">
+            <div class="stat">
+              <span class="stat-icon">❤️</span>
+              <span class="stat-label">PV</span>
+              <span class="stat-value"><%= character.health %></span>
             </div>
 
-            <p class="card-text small text-start"><strong>Quirks:</strong> <%= character.quirks.truncate(120) %></p>
+            <div class="stat">
+              <span class="stat-icon">✨</span>
+              <span class="stat-label">Mana</span>
+              <span class="stat-value"><%= character.mana %></span>
+            </div>
 
-            <%= link_to "Sélectionner", games_path, class: "btn btn-primary mt-2" %>
+            <div class="stat">
+              <span class="stat-icon">⚔️</span>
+              <span class="stat-label">Force</span>
+              <span class="stat-value"><%= character.strength %></span>
+            </div>
           </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
 
-  <div class="text-center mt-5">
-    <%= link_to "Retour au jeu", games_path, class: "btn btn-success btn-lg" %>
+          <div class="character-quirks">
+            <p class="quirks-label">Particularités :</p>
+            <p class="quirks-text"><%= character.quirks %></p>
+          </div>
+
+          <div class="character-select-btn">
+            CHOISIR →
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Back button -->
+   <%= link_to scenarios_games_path, class: "btn-back" do %>
+  ← Retour aux scénarios
+<% end %>
   </div>
 </div>
