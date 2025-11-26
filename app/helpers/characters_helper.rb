@@ -1,22 +1,20 @@
 module CharactersHelper
   def character_image(character)
-    # Normalisation : minuscules, accents remplacés, espaces -> tirets
+    # Normalisation du nom
     filename = character.name.downcase
-                           .tr("éèêëàâîïôûùç", "eeeeaaaiiouuc") # accents
-                           .gsub(/[^a-z0-9]+/, "-")              # caractères non-alphanum -> tiret
-                           .gsub(/^-|-$/, "")                     # supprime tirets de début/fin
-                           + ".png"
+                           .tr("éèêëàâîïôûùç", "eeeeaaaiiouuc")
+                           .gsub(/[^a-z0-9]+/, "-")
+                           .gsub(/^-|-$/, "")
 
-    # En production, on fait confiance aux assets précompilés
-    if Rails.env.production?
-      filename
-    else
-      # En développement, on vérifie que le fichier existe
-      if Rails.application.assets && Rails.application.assets.find_asset(filename)
-        filename
-      else
-        "placeholder.png"
-      end
-    end
+    # URL Cloudinary
+    Cloudinary::Utils.cloudinary_url("characters/#{filename}.png",
+      secure: true,
+      transformation: [
+        { width: 400, crop: :fill }  # Optionnel : resize automatique
+      ]
+    )
+  rescue => e
+  
+    Cloudinary::Utils.cloudinary_url("placeholder.png", secure: true)
   end
 end

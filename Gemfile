@@ -4,6 +4,10 @@ ruby "3.3.5"
 
 gem "devise"
 
+gem "dotenv-rails"
+
+gem "cloudinary"
+
 #llm gem for integration
 gem "ruby_llm", "~> 1.2.0"
 
