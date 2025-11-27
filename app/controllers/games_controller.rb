@@ -128,12 +128,20 @@ private
 
   def build_history
   history = ""
+  token_count = 0
+  max_tokens = 2000  # Limite de sécurité
 
-  @game.messages.last(10).each do |msg|
-    author = msg.role == "user" ? "Joueur" : "Maître du Jeu"
-    history += "#{author}: #{msg.content}\n\n"
+  @game.messages.order(created_at: :desc).each do |msg|
+    message_text = "#{msg.role == 'user' ? 'Joueur' : 'MJ'}: #{msg.content}\n\n"
+    message_tokens = message_text.length / 4  # Estimation : 1 token ≈ 4 caractères
+
+    # Arrêter si on dépasse la limite
+    break if token_count + message_tokens > max_tokens
+
+    history = message_text + history  # Ajouter au début (ordre chronologique)
+    token_count += message_tokens
   end
 
   history
- end
+end
 end
