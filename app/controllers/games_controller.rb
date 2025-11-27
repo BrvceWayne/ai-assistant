@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
   def index
     @games = Game.all.order(created_at: :desc)
+    @scenario = Scenario.find(params[:scenario_id])
+    @character = Character.find(params[:character_id])
   end
 
   def scenarios
@@ -8,12 +10,13 @@ class GamesController < ApplicationController
   end
 
   def characters
-    @scenario = Scenario.find(params[:scenario_id])
     @characters = Character.all
+    @scenario = Scenario.find(params[:scenario_id])
   end
 
   def create
     @game = Game.new(
+      user_id: current_user.id,
       scenario_id: params[:scenario_id],
       character_id: params[:character_id],
       state: 'in_progress'
@@ -95,6 +98,13 @@ class GamesController < ApplicationController
 
     redirect_to game_path(@game)
  end
+
+  def destroy
+    @game = Game.find(params[:id])
+    @game.destroy
+
+    redirect_to games_path, notice: "Partie supprimée avec succès"
+  end
 
 private
 
