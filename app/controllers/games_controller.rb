@@ -30,6 +30,9 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @character = @game.character
+    @scenario = @game.scenario
+    @messages = @game.messages.order(created_at: :asc)
   end
 
 end
