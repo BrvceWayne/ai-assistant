@@ -25,6 +25,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_104906) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.bigint "game_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_chats_on_game_id"
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
   create_table "games", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "character_id", null: false
@@ -66,6 +76,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_104906) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "chats", "games"
+  add_foreign_key "chats", "users"
   add_foreign_key "games", "characters"
   add_foreign_key "games", "scenarios"
   add_foreign_key "games", "users"

@@ -51,6 +51,37 @@ end
 puts "🎉 Seed for characters completed! #{Character.count} characters created."
 
 scenarios_data = [
+  {
+  title: "L'ombre du Serment",
+  description: "Démo express – Scénario médiéval fantastique, fin fermée en 3 min",
+  scenario_prompt: <<~PROMPT
+    Tu es une IA scénariste experte en univers médiéval fantastique.
+    Ce scénario doit être utilisé pour une démonstration courte (3 minutes maximum).
+
+    Personnage : {{character}}
+
+    Objectif :
+    Création d’un scénario fulgurant, intense, immersif, avec **issue finale définitive** (aucune suite possible).
+
+    Directives :
+    - Analyse uniquement la motivation profonde du personnage.
+    - Commence **en plein milieu d'une crise** (attaque, exécution, rite interdit…).
+    - **3 choix maximum**, chacun impactant immédiatement l’histoire.
+    - Après le dernier choix → **événement dramatique inévitable**.
+    - **Fin fermée**, brutale ou héroïque. Terminer sur une phrase forte, définitive.
+    - Jamais “à suivre”, “continuez”, ni ouverture. Fin absolue.
+    - Style : cinématique, tendu, pas de temps morts. Pas de narration méta.
+
+     Structure attendue (condensée) :
+    -  Introduction directe : l’action commence en plein chaos.
+    -  Événement déclencheur : la prophétie ou menace se révèle, liée au personnage.
+    -  choix critiques (décision immédiate).
+    -  Rebondissement fatal ou sacrifice.
+    -  Conclusion finale — pas de suite possible.
+
+    Format : texte narratif, max 2 minutes de lecture. Aucun retour technique. Commence directement l’histoire.
+  PROMPT
+  },
 {
   title: "Légendes oubliées",
   description: "Médiéval fantastique",
