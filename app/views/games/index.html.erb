@@ -1,62 +1,71 @@
-<div class="container mt-5">
+<div class="games-page">
+  <div class="games-content">
 
-  <!-- Header + bouton Nouvelle partie -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="mb-0">Parties en cours</h1>
+    <!-- Header -->
+    <div class="games-header">
+      <h1>Parties en cours</h1>
 
-    <%= button_to "➕ Nouvelle partie",
-          games_path,  # POST /games
-          method: :post,
-          class: "btn-dd px-4" %>
-  </div>
-
-  <!-- Si aucune partie -->
-  <% if @games.empty? %>
-
-    <div class="alert alert-info text-center py-5">
-      <h4 class="mb-3">Aucune partie en cours</h4>
-      <p>Commence une nouvelle aventure fantastique !</p>
-
-      <%= button_to "➕ Démarrer une nouvelle partie",
+      <%= button_to "➕ Nouvelle partie",
             games_path,
             method: :post,
-            class: "btn-dd mt-3 px-5" %>
+            class: "new-game-btn" %>
     </div>
 
-  <% else %>
+    <!-- Si aucune partie -->
+    <% if @games.empty? %>
 
-    <!-- Parties existantes -->
-    <div class="row">
-      <% @games.each do |game| %>
-        <div class="col-md-4 mb-4">
-          <div class="card shadow-sm h-100">
+      <div class="empty-state">
+        <h4>Aucune partie en cours</h4>
+        <p>Commence une nouvelle aventure fantastique !</p>
 
-            <div class="card-body d-flex flex-column">
+        <%= button_to "➕ Démarrer une nouvelle partie",
+              games_path,
+              method: :post,
+              class: "start-game-btn" %>
+      </div>
 
-              <h5 class="card-title">Partie #<%= game.id %></h5>
+    <% else %>
 
-              <p class="card-text">
-                <strong>Scénario :</strong>
-                <%= game.scenario&.title || "Non défini" %>
-              </p>
+      <!-- Grid de parties -->
+      <div class="games-grid">
+        <% @games.each do |game| %>
+          <% variant = rand(1..10) %>
+          <div class="game-card game-variant-<%= variant %>">
 
-              <p class="card-text">
-                <strong>Personnage :</strong>
-                <%= game.character&.name || "Non défini" %>
-              </p>
-
-              <div class="mt-auto">
-                <%= link_to "▶ Continuer",
-                    game_path(game),
-                    class: "btn btn-outline-primary w-100" %>
-              </div>
-
+            <div class="game-card-header">
+              <h5 class="game-id">Partie #<%= game.id %></h5>
             </div>
 
-          </div>
-        </div>
-      <% end %>
-    </div>
+            <div class="game-info">
+              <div class="game-detail scenario">
+                <div class="detail-label">Scénario</div>
+                <div class="detail-value">
+                  <%= game.scenario&.title || "Non défini" %>
+                </div>
+              </div>
 
-  <% end %>
+              <div class="game-detail character">
+                <div class="detail-label">Personnage</div>
+                <div class="detail-value">
+                  <%= game.character&.name || "Non défini" %>
+                </div>
+              </div>
+            </div>
+
+            <%= link_to "▶ Continuer",
+                game_path(game),
+                class: "continue-btn" %>
+
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Back button -->
+      <%= link_to characters_games_path, class: "btn-back" do %>
+        ← Retour aux personnages
+      <% end %>
+
+    <% end %>
+
+  </div>
 </div>
