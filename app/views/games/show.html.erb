@@ -1,3 +1,4 @@
+<%= render 'shared/loading_spinner' %>
 
 <div class="game-page">
   <div class="game-container">
@@ -58,49 +59,82 @@
 
     <!-- Zone principale : Messages + Input -->
     <main class="game-main">
-
-      <!-- Messages -->
-      <div class="messages-container" id="messagesContainer">
-        <% @messages.each do |message| %>
-          <div class="message message-<%= message.role %>">
-            <div class="message-header">
-              <span class="message-author">
-                <%= message.role == 'user' ? '🎮 Vous' : '🎲 Maître du Jeu' %>
-              </span>
-              <span class="message-time">
-                <%= message.created_at.strftime('%H:%M') %>
-              </span>
-            </div>
-            <div class="message-content">
-              <%= simple_format(message.content) %>
-            </div>
-          </div>
-        <% end %>
+<!-- Messages -->
+<div class="messages-container" id="messagesContainer">
+  <% @messages.each do |message| %>
+    <div class="message message-<%= message.role %>">
+      <div class="message-header">
+        <span class="message-author">
+          <%= message.role == 'user' ? '🎮 Vous' : '🎲 Maître du Jeu' %>
+        </span>
+        <span class="message-time">
+          <%= message.created_at.strftime('%H:%M') %>
+        </span>
       </div>
-
-      <!-- Input zone -->
-      <div class="input-zone">
-        <%= form_with url: player_action_game_path(@game),
-            method: :post,
-            class: "action-form",
-            data: { turbo: false } do |f| %>
-          <%= f.text_area :action_text,
-              placeholder: "Que faites-vous ? (Ex: J'explore la pièce, j'attaque le gobelin...)",
-              class: "action-input",
-              rows: 3 %>
-          <%= f.submit "➤ Envoyer", class: "btn-send-action" %>
-        <% end %>
+      <div class="message-content">
+        <%= simple_format(message.content) %>
       </div>
+    </div>
+  <% end %>
 
-    </main>
+  <%= render 'shared/chat_spinner' %>
+</div>
 
-  </div>
+<!-- Input zone -->
+<!-- Input zone -->
+<div class="input-zone">
+  <form action="<%= player_action_game_path(@game) %>"
+        method="post"
+        class="action-form"
+        accept-charset="UTF-8"
+        onsubmit="showSpinnerAndScroll(); return true;">
+
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <textarea
+      name="action_text"
+      id="action_text"
+      placeholder="Que faites-vous ? (Ex: J'explore la pièce, j'attaque le gobelin...)"
+      class="action-input"
+      rows="3"
+      required></textarea>
+
+    <button type="submit" class="btn-send-action">➤ Envoyer</button>
+  </form>
 </div>
 
 <script>
-  // Auto-scroll vers le bas des messages
-  const container = document.getElementById('messagesContainer');
-  if (container) {
-    container.scrollTop = container.scrollHeight;
+  // Fonction pour afficher le spinner ET scroller
+  function showSpinnerAndScroll() {
+    const spinner = document.getElementById('chatSpinner');
+    const container = document.getElementById('messagesContainer');
+
+    if (spinner) {
+      spinner.style.display = 'flex';
+    }
+
+    // Scroll vers le bas pour voir le spinner
+    if (container) {
+      setTimeout(function() {
+        container.scrollTop = container.scrollHeight;
+      }, 10);
+    }
+
+    return true;
   }
+
+  // Auto-scroll au chargement
+  (function() {
+    function scrollToBottom() {
+      const container = document.getElementById('messagesContainer');
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+
+    scrollToBottom();
+    document.addEventListener('DOMContentLoaded', scrollToBottom);
+    window.addEventListener('load', scrollToBottom);
+    setTimeout(scrollToBottom, 100);
+  })();
 </script>

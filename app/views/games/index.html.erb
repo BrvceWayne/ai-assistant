@@ -1,3 +1,5 @@
+<%= render 'shared/loading_spinner' %>
+
 <div class="games-page">
   <div class="games-content">
 
@@ -22,7 +24,10 @@
         <p>Commence une nouvelle aventure fantastique !</p>
 
         <%= button_to "➕ Démarrer une nouvelle partie",
-              games_path,
+              games_path(
+              scenario_id: params[:scenario_id],
+              character_id: params[:character_id]
+            ),
               method: :post,
               class: "start-game-btn" %>
       </div>
@@ -77,3 +82,34 @@
 
   </div>
 </div>
+
+<script>
+  // Cacher le spinner au chargement de la page index
+  document.addEventListener('DOMContentLoaded', function() {
+    const spinner = document.getElementById('loadingOverlay');
+    if (spinner) {
+      spinner.style.display = 'none';
+    }
+  });
+
+  // Afficher le spinner quand on clique sur "Continuer"
+  document.querySelectorAll('.continue-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const spinner = document.getElementById('loadingOverlay');
+      if (spinner) {
+        spinner.style.display = 'flex';
+      }
+    });
+  });
+
+  // Afficher spinner quand on clique "Nouvelle partie"
+  const newGameBtn = document.querySelector('.new-game-btn');
+  if (newGameBtn) {
+    newGameBtn.addEventListener('click', function() {
+      const spinner = document.getElementById('loadingOverlay');
+      if (spinner) {
+        spinner.style.display = 'flex';
+      }
+    });
+  }
+</script>
