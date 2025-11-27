@@ -1,3 +1,4 @@
+
 <div class="game-page">
   <div class="game-container">
 
@@ -79,16 +80,16 @@
 
       <!-- Input zone -->
       <div class="input-zone">
-       <%= form_with url: player_action_game_path(@game),
-    method: :post,
-    class: "action-form",
-    data: { turbo: false } do |f| %>  <%# 👈 AJOUTE CETTE LIGNE %>
-  <%= f.text_area :action_text,
-      placeholder: "Que faites-vous ? (Ex: J'explore la pièce, j'attaque le gobelin...)",
-      class: "action-input",
-      rows: 3 %>
-  <%= f.submit "➤ Envoyer", class: "btn-send-action" %>
-<% end %>
+        <%= form_with url: player_action_game_path(@game),
+            method: :post,
+            class: "action-form",
+            data: { turbo: false } do |f| %>
+          <%= f.text_area :action_text,
+              placeholder: "Que faites-vous ? (Ex: J'explore la pièce, j'attaque le gobelin...)",
+              class: "action-input",
+              rows: 3 %>
+          <%= f.submit "➤ Envoyer", class: "btn-send-action" %>
+        <% end %>
       </div>
 
     </main>
