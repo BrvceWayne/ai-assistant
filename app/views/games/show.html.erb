@@ -62,7 +62,9 @@
 <!-- Messages -->
 <div class="messages-container" id="messagesContainer">
   <% @messages.each do |message| %>
-    <div class="message message-<%= message.role %>">
+    <div class="message message-<%= message.role %>
+         <%= 'message-new' if message.id == session[:new_message_id] %>"
+         data-message-id="<%= message.id %>">
       <div class="message-header">
         <span class="message-author">
           <%= message.role == 'user' ? '🎮 Vous' : '🎲 Maître du Jeu' %>
@@ -71,8 +73,15 @@
           <%= message.created_at.strftime('%H:%M') %>
         </span>
       </div>
-      <div class="message-content">
-        <%= simple_format(message.content) %>
+      <div class="message-content"
+           <% if message.id == session[:new_message_id] %>
+             data-typewriter="<%= message.content %>"
+           <% end %>>
+        <% if message.id == session[:new_message_id] %>
+          <!-- Le texte sera ajouté par JS -->
+        <% else %>
+          <%= simple_format(message.content) %>
+        <% end %>
       </div>
     </div>
   <% end %>
@@ -113,7 +122,6 @@
       spinner.style.display = 'flex';
     }
 
-    // Scroll vers le bas pour voir le spinner
     if (container) {
       setTimeout(function() {
         container.scrollTop = container.scrollHeight;
@@ -123,7 +131,30 @@
     return true;
   }
 
-  // Auto-scroll au chargement
+  // Effet typewriter
+  function typewriter(element, text, speed = 30) {
+    let index = 0;
+    element.textContent = '';
+
+    function type() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+
+        // Auto-scroll pendant l'animation
+        const container = document.getElementById('messagesContainer');
+        if (container) {
+          container.scrollTop = container.scrollHeight;
+        }
+
+        setTimeout(type, speed);
+      }
+    }
+
+    type();
+  }
+
+  // Auto-scroll et typewriter au chargement
   (function() {
     function scrollToBottom() {
       const container = document.getElementById('messagesContainer');
@@ -132,9 +163,21 @@
       }
     }
 
+    // Lancer l'effet typewriter sur le nouveau message
+    const newMessage = document.querySelector('[data-typewriter]');
+    if (newMessage) {
+      const text = newMessage.getAttribute('data-typewriter');
+      const contentDiv = newMessage;
+      typewriter(contentDiv, text, 10); // 30ms entre chaque caractère
+    }
+
     scrollToBottom();
     document.addEventListener('DOMContentLoaded', scrollToBottom);
     window.addEventListener('load', scrollToBottom);
     setTimeout(scrollToBottom, 100);
   })();
+
+  setTimeout(function() {
+    <% session.delete(:new_message_id) %>
+  }, 100);
 </script>

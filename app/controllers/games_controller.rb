@@ -94,7 +94,11 @@ def show
     ai_response = "Le maître du jeu réfléchit... Réessayez."
   end
 
-  @game.messages.create!(role: "assistant", content: ai_response)
+  # Sauvegarder avec un flag "nouveau"
+  @new_message = @game.messages.create!(role: "assistant", content: ai_response)
+
+  # Stocker l'ID du nouveau message en session
+  session[:new_message_id] = @new_message.id
 
   redirect_to game_path(@game)
 end
