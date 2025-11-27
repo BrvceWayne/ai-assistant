@@ -52,52 +52,52 @@ class GamesController < ApplicationController
     end
  end
 
-  def show
+def show
       @game = Game.find(params[:id])
       @character = @game.character
       @scenario = @game.scenario
       @messages = @game.messages.order(created_at: :asc)
     end
 
-    def player_action
-    @game = Game.find(params[:id])
-    player_input = params[:action_text]
+ def player_action
+  @game = Game.find(params[:id])
+  player_input = params[:action_text]
 
-    # Sauvegarder message joueur
-    @game.messages.create!(role: "user", content: player_input)
+  # Sauvegarder message joueur
+  @game.messages.create!(role: "user", content: player_input)
 
-    begin
-      # Créer une session de chat
-      chat = RubyLLM.chat
+  begin
+    chat = RubyLLM.chat
 
-      # Construire un prompt texte complet avec historique
-      full_prompt = <<~PROMPT
-        #{@game.scenario.scenario_prompt}
+    full_prompt = <<~PROMPT
+      #{@game.scenario.scenario_prompt}
 
-        #{build_character_context}
+      #{build_character_context}
 
-        HISTORIQUE DE LA PARTIE :
-        #{build_history}
+      HISTORIQUE DE LA PARTIE :
+      #{build_history}
 
-        Action du joueur : #{player_input}
+      Action du joueur : #{player_input}
 
-        Réponds en tant que maître du jeu :
-      PROMPT
+      Réponds en tant que maître du jeu :
+    PROMPT
 
-      # Appeler l'API
-      response = chat.ask(full_prompt)
-      ai_response = response.content
+    response = chat.ask(full_prompt)
+    ai_response = response.content
 
-    rescue => e
-      Rails.logger.error("Erreur LLM: #{e.message}")
-      ai_response = "Le maître du jeu réfléchit... Réessayez dans quelques instants."
+    if ai_response.blank?
+      ai_response = "Le maître du jeu semble perdu... Réessayez."
     end
 
-    # Sauvegarder réponse IA
-    @game.messages.create!(role: "assistant", content: ai_response)
+  rescue => e
+    Rails.logger.error("❌ Erreur: #{e.message}")
+    ai_response = "Le maître du jeu réfléchit... Réessayez."
+  end
 
-    redirect_to game_path(@game)
- end
+  @game.messages.create!(role: "assistant", content: ai_response)
+
+  redirect_to game_path(@game)
+end
 
   def destroy
     @game = Game.find(params[:id])

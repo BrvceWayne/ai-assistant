@@ -252,6 +252,9 @@ html:has(.game-page) {
   padding: 20px 30px;
   background: rgba($dark, 0.5);
   flex-shrink: 0;
+  position: sticky;  // 👈 AJOUTE
+  bottom: 0;         // 👈 AJOUTE
+  z-index: 10;
 }
 
 .action-form {
@@ -301,4 +304,38 @@ html:has(.game-page) {
 
 .btn-send-action:active {
   transform: translateY(0);
+}
+
+
+// Style du bouton désactivé
+.btn-send-action {
+  padding: 15px 30px;
+  font-family: $font-family-base;
+  font-size: 12px;
+  color: $dark;
+  background: $primary;
+  border: 3px solid darken($primary, 10%);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    background: lighten($primary, 10%);
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: darken($primary, 10%);
+  }
+}
+
+.action-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
