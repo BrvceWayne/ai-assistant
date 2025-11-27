@@ -22,7 +22,9 @@ class GamesController < ApplicationController
     )
 
     if @game.save
-      redirect_to @game
+      intro = "Bienvenue #{@game.character.name} ! #{@game.scenario.description}"
+      @game.messages.create!(role: "assistant", content: intro)
+      redirect_to game_path(@game)
     else
       redirect_to games_scenarios_path, alert: "Impossible de démarrer la partie."
     end
@@ -35,4 +37,14 @@ class GamesController < ApplicationController
     @messages = @game.messages.order(created_at: :asc)
   end
 
+  def player_action
+    @game = Game.find(params[:id])
+    player_input = params[:action_text]
+    @game.messages.create!(role: "user", content: player_input)
+
+    # Message test (on mettra l'API après)
+    @game.messages.create!(role: "assistant", content: "Test réponse IA")
+
+    redirect_to game_path(@game)
+  end
 end
