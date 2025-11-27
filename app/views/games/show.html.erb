@@ -1,0 +1,102 @@
+<div class="game-page">
+  <div class="game-container">
+
+    <!-- Sidebar : Info personnage + scénario -->
+    <aside class="game-sidebar">
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">
+          <span class="title-icon">⚔️</span> Personnage
+        </h3>
+        <div class="character-info">
+          <h4 class="char-name"><%= @character.name %></h4>
+          <p class="char-class"><%= @character.class_type.upcase %></p>
+
+          <div class="char-stats">
+            <div class="stat-row">
+              <span class="stat-icon">❤️</span>
+              <span class="stat-label">PV</span>
+              <span class="stat-bar">
+                <span class="stat-fill" style="width: 100%"></span>
+              </span>
+              <span class="stat-value"><%= @character.health %></span>
+            </div>
+
+            <div class="stat-row">
+              <span class="stat-icon">✨</span>
+              <span class="stat-label">Mana</span>
+              <span class="stat-bar">
+                <span class="stat-fill stat-fill-mana" style="width: 100%"></span>
+              </span>
+              <span class="stat-value"><%= @character.mana %></span>
+            </div>
+
+            <div class="stat-row">
+              <span class="stat-icon">⚔️</span>
+              <span class="stat-label">Force</span>
+              <span class="stat-value"><%= @character.strength %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">
+          <span class="title-icon">📜</span> Scénario
+        </h3>
+        <div class="scenario-info">
+          <h4 class="scenario-name"><%= @scenario.title %></h4>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <%= link_to root_path, class: "btn-quit" do %>
+          🚪 Quitter la partie
+        <% end %>
+      </div>
+    </aside>
+
+    <!-- Zone principale : Messages + Input -->
+    <main class="game-main">
+
+      <!-- Messages -->
+      <div class="messages-container" id="messagesContainer">
+        <% @messages.each do |message| %>
+          <div class="message message-<%= message.role %>">
+            <div class="message-header">
+              <span class="message-author">
+                <%= message.role == 'user' ? '🎮 Vous' : '🎲 Maître du Jeu' %>
+              </span>
+              <span class="message-time">
+                <%= message.created_at.strftime('%H:%M') %>
+              </span>
+            </div>
+            <div class="message-content">
+              <%= simple_format(message.content) %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Input zone -->
+      <div class="input-zone">
+        <%= form_with url: player_action_game_path(@game), method: :post, class: "action-form" do |f| %>
+          <%= f.text_area :action_text,
+              placeholder: "Que faites-vous ? (Ex: J'explore la pièce, j'attaque le gobelin...)",
+              class: "action-input",
+              rows: 3 %>
+          <%= f.submit "➤ Envoyer", class: "btn-send-action" %>
+        <% end %>
+      </div>
+
+    </main>
+
+  </div>
+</div>
+
+<script>
+  // Auto-scroll vers le bas des messages
+  const container = document.getElementById('messagesContainer');
+  if (container) {
+    container.scrollTop = container.scrollHeight;
+  }
+</script>
