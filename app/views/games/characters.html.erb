@@ -24,10 +24,9 @@
     <!-- Characters Grid -->
     <div class="characters-grid">
       <% @characters.each do |character| %>
-        <%= link_to games_path(scenario_id: @scenario.id, character_id: character.id),
-            method: :post,
-            class: "character-card character-#{character.class_type}",
-            data: { turbo: false } do %>
+        <%= button_to games_path(scenario_id: @scenario.id, character_id: character.id),
+              method: :post,
+              class: "character-card character-#{character.class_type}" do %>
 
           <div class="character-header-card">
             <h3 class="character-name"><%= character.name %></h3>

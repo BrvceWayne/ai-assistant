@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_104906) do
     t.integer "strength"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cloudinary_id"
   end
 
   create_table "games", force: :cascade do |t|
