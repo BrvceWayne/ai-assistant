@@ -1,8 +1,8 @@
 class GamesController < ApplicationController
   def index
     @games = Game.all.order(created_at: :desc)
-    @scenario = Scenario.find(params[:scenario_id])
-    @character = Character.find(params[:character_id])
+    # @scenario = Scenario.find(params[:scenario_id])
+    # @character = Character.find(params[:character_id])
   end
 
   def scenarios
