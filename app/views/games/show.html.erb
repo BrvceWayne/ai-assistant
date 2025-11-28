@@ -67,7 +67,7 @@
          data-message-id="<%= message.id %>">
       <div class="message-header">
         <span class="message-author">
-          <%= message.role == 'user' ? '🎮 Vous' : '🎲 Maître du Jeu' %>
+          <%= message.role == 'user' ? '🎮' + ' ' + current_user.email.split('@').first.upcase : '🎲 Maître du Jeu' %>
         </span>
         <span class="message-time">
           <%= message.created_at.strftime('%H:%M') %>

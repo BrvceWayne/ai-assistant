@@ -130,7 +130,6 @@ scenarios_data = [
 
     Chaque choix a des conséquences. Récompense l'audace.
     Pas de game over brutal. Surprends le joueur.
-
     COMMENCE. Action immédiate. ⚔️
   PROMPT
 },
@@ -473,17 +472,7 @@ scenarios_data = [
 ]
 
   User.create!(
-    email: "test@gmail.com",
-    password: "123456"
-  )
-
-  User.create!(
-    email: "test1@gmail.com",
-    password: "123456"
-  )
-
-  User.create!(
-    email: "test2@gmail.com",
+    email: "normann@gmail.com",
     password: "123456"
   )
 
