@@ -1,3 +1,4 @@
+pin "click_sound", to: "click_sound.js"
 # Pin npm packages by running ./bin/importmap
 
 pin "application"
