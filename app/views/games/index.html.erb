@@ -19,12 +19,8 @@
         <h4>Aucune partie en cours</h4>
         <p>Commence une nouvelle aventure fantastique !</p>
 
-        <%= button_to "➕ Démarrer une nouvelle partie",
-              games_path(
-              scenario_id: params[:scenario_id],
-              character_id: params[:character_id]
-            ),
-              method: :post,
+        <%= link_to "➕ Démarrer une nouvelle partie",
+              scenarios_games_path,
               class: "start-game-btn" %>
       </div>
 
