@@ -57,6 +57,7 @@ def show
       @character = @game.character
       @scenario = @game.scenario
       @messages = @game.messages.order(created_at: :asc)
+
     end
 
  def player_action
