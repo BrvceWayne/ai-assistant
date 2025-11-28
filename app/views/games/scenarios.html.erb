@@ -15,7 +15,10 @@
       <% @scenarios.each do |scenario| %>
         <%= link_to characters_games_path(scenario_id: scenario.id),
             class: "scenario-card",
-            data: { turbo: false } do %>
+            data: { 
+              turbo: false,
+              scenario: scenario.title.parameterize  # Add this line
+            } do %>
           <div class="scenario-card-inner">
             <h3 class="scenario-title"><%= scenario.title %></h3>
             <p class="scenario-description"><%= scenario.description %></p>
